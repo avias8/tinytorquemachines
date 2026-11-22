@@ -5,94 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy policy · Tiny Torque Machines</title>
   <meta name="description" content="What Tiny Torque Machines collects, why, and how long it is kept.">
-  <meta name="theme-color" content="#0e1013">
+  <meta name="theme-color" content="#f1ece0">
   <link rel="icon" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="./"><img src="assets/icon.png" alt=""><span>Tiny Torque Machines</span></a>
-      <nav class="site-nav" aria-label="Site">
-        <a href="./">Game</a>
+  <header class="running-head">
+    <div class="measure">
+      <a class="wordmark" href="./"><img src="assets/icon.png" alt=""><span>Tiny Torque Machines</span></a>
+      <nav aria-label="Site">
+        <a href="./">Programme</a>
         <a href="support.html">Support</a>
         <a href="privacy.html" aria-current="page">Privacy</a>
       </nav>
     </div>
   </header>
 
-  <main class="page">
-    <div class="wrap prose">
-      <div class="kicker">Privacy</div>
-      <h1>Privacy policy</h1>
-      <p class="updated">Effective November 21, 2026</p>
+  <main>
+    <section class="page-title">
+      <div class="measure">
+        <h1>Privacy</h1>
+        <p>Effective November 21, 2026</p>
+      </div>
+    </section>
 
-      <p>Tiny Torque Machines is made by Avi Varma, an independent developer. This policy explains what the game collects, why, and how long it is kept. The short version: <strong>no account, no ads, no analytics, no tracking.</strong> The only information that leaves your device is what multiplayer needs to put you in a race.</p>
+    <div class="measure text">
+      <article>
+        <p>Tiny Torque Machines is made by Avi Varma, an independent developer. This page explains what the game collects, why, and how long it is kept. In short: <strong>no account, no ads, no analytics, no tracking.</strong> The only information that leaves your device is what multiplayer needs to put you in a race.</p>
 
-      <h2>Single-player</h2>
-      <p>Single-player races collect nothing. Your progress (credits, cars, upgrades, paint) and your settings are saved on your device only. Deleting the app deletes them.</p>
+        <h2>Single-player</h2>
+        <p>Single-player races collect nothing. Your progress (credits, cars, upgrades, paint) and your settings are saved on your device only. Deleting the app deletes them.</p>
 
-      <h2>Multiplayer</h2>
-      <p>Multiplayer is optional. When you use it, the game uses two services:</p>
+        <h2>Multiplayer</h2>
+        <p>Multiplayer is optional. When you use it, the game relies on two services.</p>
 
-      <h3>Game Center (Apple)</h3>
-      <p>Game Center signs you in, finds other players and carries race data between the players in a race, such as car positions, weapon fire and results. Apple's handling of Game Center data is covered by <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</p>
+        <h3>Game Center, from Apple</h3>
+        <p>Game Center signs you in, finds other players, and carries race data between the players in a race: car positions, weapon fire and results. Apple's handling of that data is covered by <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</p>
 
-      <h3>The race lobby (SpacetimeDB)</h3>
-      <p>A small lobby server seats players in the same race. It runs on SpacetimeDB Maincloud, a hosted database service from Clockwork Labs. While you're in a multiplayer race it stores:</p>
-      <div class="table-scroll">
+        <h3>The race lobby</h3>
+        <p>A small lobby server seats everyone in the same race. It runs on SpacetimeDB Maincloud, a hosted database service from Clockwork Labs. While you're in a multiplayer race it holds:</p>
         <table>
-          <thead>
-            <tr><th>What</th><th>Why</th><th>How long</th></tr>
-          </thead>
+          <thead><tr><th>What</th><th>Why</th><th>Kept until</th></tr></thead>
           <tbody>
-            <tr><td>Your Game Center display name</td><td>To show other racers who is in the lobby</td><td>Removed about 30 seconds after you leave or disconnect</td></tr>
-            <tr><td>A random lobby identity, created by the game</td><td>To keep your seat if your connection drops briefly</td><td>Removed with your display name; the key that proves it is yours stays in your device's keychain</td></tr>
-            <tr><td>Your lobby status: which race, ready or not, connected or not</td><td>To start the race when everyone is ready</td><td>Removed when you leave</td></tr>
-            <tr><td>Race settings: track, laps, start time</td><td>So every player races the same race</td><td>Removed when the race empties</td></tr>
+            <tr><td>Your Game Center display name</td><td>So the others can see who's in the lobby</td><td>About 30 seconds after you leave or lose connection</td></tr>
+            <tr><td>A random lobby identity the game creates</td><td>So a dropped connection doesn't lose your seat</td><td>Removed with your name; the key that proves it's yours stays in your device's keychain</td></tr>
+            <tr><td>Which race you're in, and whether you're ready and connected</td><td>To start the race when everyone's ready</td><td>You leave</td></tr>
+            <tr><td>The race's settings: circuit, laps, start time</td><td>So everyone races the same race</td><td>The race empties</td></tr>
           </tbody>
         </table>
-      </div>
-      <p>Your Game Center player ID is never stored on the lobby server. To match lobby seats to Game Center players, the game uses a one-way scrambled tag that only means something inside that one lobby.</p>
+        <p>Your Game Center player ID is never stored on the lobby server. To match lobby seats with Game Center players, the game uses a one-way scrambled tag that means nothing outside that one lobby.</p>
 
-      <h2>What the game doesn't do</h2>
-      <ul>
-        <li>No accounts, sign-ups or passwords.</li>
-        <li>No advertising, and no advertising identifiers.</li>
-        <li>No analytics, crash-reporting or tracking software, and no data sold or shared for tracking.</li>
-        <li>No location, contacts, photos, camera or microphone access.</li>
-      </ul>
+        <h2>What the game doesn't do</h2>
+        <ul>
+          <li>No accounts, sign-ups or passwords.</li>
+          <li>No advertising and no advertising identifiers.</li>
+          <li>No analytics, crash-reporting or tracking software. Nothing is sold or shared for tracking.</li>
+          <li>No access to your location, contacts, photos, camera or microphone.</li>
+        </ul>
 
-      <h2>Motion sensors</h2>
-      <p>If you turn on tilt steering, the game reads your device's motion sensors to steer the car. The readings are used on the device in real time and are never stored or sent anywhere.</p>
+        <h2>Motion sensors</h2>
+        <p>With tilt steering on, the game reads your device's motion sensors to steer. The readings are used on the device as you drive and are never stored or sent anywhere.</p>
 
-      <h2>Information Apple provides</h2>
-      <p>If you choose to share analytics and crash data with app developers in your device's settings, Apple may give me anonymous, aggregated crash reports and usage statistics through App Store Connect. These can't identify you, and you can turn sharing off at any time in Settings ▸ Privacy &amp; Security ▸ Analytics &amp; Improvements.</p>
+        <h2>What Apple may share with me</h2>
+        <p>If you've chosen to share analytics and crash data with app developers, Apple may give me anonymous, aggregated crash reports and usage figures through App Store Connect. They can't identify you, and you can turn sharing off in Settings ▸ Privacy &amp; Security ▸ Analytics &amp; Improvements.</p>
 
-      <h2>Children</h2>
-      <p>The game doesn't knowingly collect personal information from children beyond the multiplayer display name described above, which Game Center provides. Game Center's own controls, including Screen Time restrictions on multiplayer games, apply.</p>
+        <h2>Children</h2>
+        <p>The game doesn't knowingly collect personal information from children beyond the multiplayer display name above, which comes from Game Center. Game Center's own controls, including Screen Time limits on multiplayer games, still apply.</p>
 
-      <h2>Your choices</h2>
-      <p>You can play entirely offline and nothing is collected. You can sign out of Game Center in the Settings app. To ask about, or ask me to delete, anything the lobby holds, email me at the address below.</p>
+        <h2>Your choices</h2>
+        <p>Play offline and nothing is collected. You can sign out of Game Center in the Settings app. To ask about anything the lobby holds, or to have it deleted, email me.</p>
 
-      <h2>Changes</h2>
-      <p>If this policy changes, the new version will be posted on this page with a new effective date.</p>
+        <h2>Changes</h2>
+        <p>If this policy changes, the new version will appear here with a new effective date.</p>
+      </article>
 
-      <h2>Contact</h2>
-      <div class="contact">
-        <a href="mailto:harshvardhanv98@gmail.com?subject=Tiny%20Torque%20Machines%20privacy">harshvardhanv98@gmail.com</a>
-      </div>
+      <aside>
+        <h2>Contact</h2>
+        <a class="mail" href="mailto:harshvardhanv98@gmail.com?subject=Tiny%20Torque%20Machines%20privacy">harshvardhanv98@gmail.com</a>
+        <p>Questions about this policy, or requests about your data.</p>
+      </aside>
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="wrap">
-      <span>© 2026 Avi Varma</span>
-      <nav aria-label="Footer">
-        <a href="./">Game</a>
-        <a href="support.html">Support</a>
-      </nav>
+  <footer class="colophon">
+    <div class="measure">
+      <span>Tiny Torque Machines · © 2026 Avi Varma</span>
+      <nav aria-label="Footer"><a href="./">Programme</a><a href="support.html">Support</a></nav>
     </div>
   </footer>
 </body>
