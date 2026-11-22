@@ -23,7 +23,10 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--paper);
+  /* A faint printed grain, drawn inline so nothing is fetched. */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27180%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3CfeColorMatrix values=%270 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.09 0%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E"),
+    var(--paper);
   color: var(--ink);
   font: 17px/1.55 var(--text);
 }
@@ -54,14 +57,42 @@ a:hover { color: var(--red); }
 .wordmark { display: flex; align-items: center; gap: 10px; font-weight: 800; }
 .wordmark img { width: 26px; height: 26px; border-radius: 6px; }
 
-/* Cover */
+/* Cover: the start grid, with the gantry counting down over it */
+.cover { position: relative; }
 .cover-art {
   aspect-ratio: 21 / 8;
-  min-height: 240px;
+  min-height: 260px;
   background: var(--asphalt) center 40% / cover no-repeat;
-  border-bottom: 2px solid var(--rule);
 }
-.masthead { padding: 36px 0 28px; border-bottom: 2px solid var(--rule); }
+.gantry {
+  position: absolute;
+  top: clamp(16px, 4vw, 40px);
+  right: clamp(16px, 5vw, 64px);
+  display: flex;
+  gap: clamp(6px, 1.2vw, 12px);
+  padding: clamp(8px, 1.4vw, 14px) clamp(10px, 1.8vw, 18px);
+  background: #101114;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+.gantry i {
+  width: clamp(16px, 3vw, 30px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #2b2d33;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.35);
+  animation: lamp-red 0.08s calc(0.6s + var(--i) * 0.8s) forwards, lamp-green 0.25s 3.2s forwards;
+}
+@keyframes lamp-red { to { background: #ff2a1f; box-shadow: 0 0 18px 4px rgba(255, 42, 31, 0.65), inset 0 -3px 0 rgba(0, 0, 0, 0.25); } }
+@keyframes lamp-green { to { background: #2bd96b; box-shadow: 0 0 18px 4px rgba(43, 217, 107, 0.6), inset 0 -3px 0 rgba(0, 0, 0, 0.25); } }
+
+.checker {
+  height: 16px;
+  background: repeating-conic-gradient(var(--ink) 0 25%, #f7f3ea 0 50%) 0 0 / 16px 16px;
+  border-block: 2px solid var(--rule);
+}
+.masthead { padding: 40px 0 32px; border-bottom: 2px solid var(--rule); }
 .masthead h1 {
   margin: 0;
   font: italic 800 clamp(52px, 11vw, 148px) / 0.86 var(--display);
@@ -89,6 +120,7 @@ a:hover { color: var(--red); }
 /* The numbers strip under the masthead */
 .facts {
   display: grid;
+  background: var(--paper-deep);
   grid-template-columns: repeat(4, 1fr);
   border-bottom: 2px solid var(--rule);
 }
@@ -133,39 +165,103 @@ a:hover { color: var(--red); }
 .spec th { font-weight: 500; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
 .spec td { text-align: right; font-weight: 700; }
 
-/* Entry list */
-.entry-list { width: 100%; border-collapse: collapse; font-size: 15px; }
-.entry-list thead th {
-  font: 600 11px/1.2 var(--mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #a9a69d;
-  text-align: left;
-  padding: 0 10px 10px;
-  border-bottom: 1px solid #555;
+/* Entry list: a paddock of cards, one per car */
+.entries {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 18px;
 }
-.entry-list td { padding: 11px 10px; border-bottom: 1px solid var(--asphalt-line); vertical-align: middle; }
-.entry-list .num { font: italic 800 26px/1 var(--display); width: 2.4em; color: #a9a69d; }
-.entry-list .car { font: italic 800 21px/1.1 var(--display); text-transform: uppercase; white-space: nowrap; }
-.entry-list .car i { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 10px; vertical-align: -1px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.25); }
-.entry-list .note { color: #c9c5ba; }
-.entry-list .price { font: 600 13px/1 var(--mono); text-align: right; white-space: nowrap; }
-.entry-list .price.starter { color: var(--amber); }
-.bars { display: grid; gap: 4px; min-width: 120px; }
-.bar { display: grid; grid-template-columns: 1.4em 1fr; align-items: center; gap: 6px; font: 600 10px/1 var(--mono); color: #8d8a82; }
-.bar u { display: block; height: 5px; background: #3a3d44; text-decoration: none; position: relative; }
-.bar u::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--v); background: var(--chalk); }
-.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.entry {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 18px 18px;
+  background: linear-gradient(180deg, #262930 0%, #1f2126 60%);
+  border: 1px solid #34373e;
+  border-top: 5px solid var(--paint);
+  border-radius: 4px 4px 12px 12px;
+  overflow: hidden;
+}
+.entry::before {
+  /* The car's paint as a floor glow under its portrait. */
+  content: "";
+  position: absolute;
+  inset: 40px 10% auto;
+  height: 150px;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--paint) 32%, transparent), transparent);
+  pointer-events: none;
+}
+.entry-no {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  font: italic 800 58px/1 var(--display);
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(236, 232, 221, 0.22);
+}
+.entry img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 6px 0 2px;
+  filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.5));
+  transition: transform 0.25s ease;
+}
+.entry:hover img { transform: translateY(-4px) rotate(-1deg); }
+.entry h3 { margin: 0; font: italic 800 25px/1 var(--display); text-transform: uppercase; }
+.entry p { margin: 6px 0 14px; font-size: 15px; color: #b9b5ab; min-height: 2.8em; }
+.bars { display: grid; gap: 6px; margin-top: auto; }
+.bar { display: grid; grid-template-columns: 1.1em 1fr 2.2em; align-items: center; gap: 8px; font: 600 11px/1 var(--mono); color: #8d8a82; }
+.bar abbr { text-decoration: none; }
+.bar u { display: block; height: 6px; background: #3a3d44; text-decoration: none; position: relative; border-radius: 3px; overflow: hidden; }
+.bar u::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--v); background: linear-gradient(90deg, var(--chalk), var(--paint)); }
+.bar em { font-style: normal; text-align: right; color: var(--chalk); }
+.entry .price { margin-top: 14px; padding-top: 10px; border-top: 1px dashed #41444b; font: 700 13px/1 var(--mono); letter-spacing: 0.04em; }
+.entry .price.starter { color: var(--amber); }
 
 /* Armoury */
 .armoury { display: grid; grid-template-columns: 1.9fr 1fr; gap: 36px; }
 .armoury h3 { margin: 0 0 12px; font: 600 12px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 10px; border-bottom: 2px solid var(--rule); }
 .weapons { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 24px; }
 .armoury .front .weapons { grid-template-columns: repeat(3, 1fr); }
-.weapon { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--rule); }
-.weapon img { width: 52px; height: 52px; }
+.weapon { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.weapon .tile {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: radial-gradient(circle at 50% 58%, color-mix(in srgb, var(--tint) 55%, transparent) 0%, transparent 68%), var(--asphalt);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tint) 45%, transparent);
+}
+.weapon img { width: 50px; height: 50px; filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.5)); }
 .weapon b { display: block; font: italic 800 19px/1.1 var(--display); text-transform: uppercase; }
 .weapon span { font-size: 14px; color: var(--ink-soft); line-height: 1.4; }
+
+/* A full-bleed spread between chapters */
+.spread { margin: 0; border-bottom: 2px solid var(--rule); background: var(--asphalt); }
+.spread img { width: 100%; height: auto; max-height: 72vh; object-fit: cover; }
+.spread figcaption { padding: 12px 0 14px; font: 13px/1.4 var(--mono); color: #a9a69d; }
+.spread figcaption b { color: var(--chalk); }
+
+/* Film reel: the start large, two clips beneath */
+.reel { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.clip { margin: 0; }
+.clip.feature { grid-column: 1 / -1; }
+.clip video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1280 / 642;
+  object-fit: cover;
+  background: var(--asphalt);
+  border: 2px solid var(--rule);
+  /* Sprocket holes, as on a strip of film. */
+  border-block: 12px solid var(--ink);
+  border-image: repeating-linear-gradient(90deg, var(--ink) 0 10px, #f7f3ea 10px 16px, var(--ink) 16px 26px) 12;
+}
+.clip figcaption { margin-top: 8px; font: 13px/1.4 var(--mono); color: var(--ink-soft); }
+.clip figcaption b { color: var(--ink); }
 
 /* Photo plates */
 .plates { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
@@ -206,11 +302,17 @@ a:hover { color: var(--red); }
 .colophon a { text-decoration: none; }
 .colophon nav { display: flex; gap: 18px; }
 
+@media (prefers-reduced-motion: reduce) {
+  .gantry i { animation: none; background: #2bd96b; }
+  .entry img { transition: none; }
+}
+
 @media (max-width: 900px) {
   .circuits { grid-template-columns: 1fr; max-width: 520px; }
   .armoury { grid-template-columns: 1fr; }
   .armoury .front .weapons { grid-template-columns: repeat(2, 1fr); }
   .plates { grid-template-columns: 1fr; }
+  .reel { grid-template-columns: 1fr; }
   .text { grid-template-columns: 1fr; }
   .text aside { position: static; }
 }
@@ -221,13 +323,15 @@ a:hover { color: var(--red); }
   .facts div:nth-child(2) { border-right: 0; }
   .facts div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
   .armoury .front .weapons { grid-template-columns: 1fr; }
-  .entry-list .note { display: none; }
-  .entry-list td, .entry-list thead th { padding-inline: 5px; }
-  .entry-list .num { width: 1.6em; font-size: 19px; }
-  .entry-list .car { font-size: 16px; white-space: normal; }
-  .entry-list .car i { width: 10px; height: 10px; margin-right: 6px; }
-  .entry-list .price { font-size: 11px; }
-  .bars { min-width: 64px; }
   .running-head .wordmark span { display: none; }
+  .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .entry { padding: 10px 10px 12px; }
+  .entry::before { inset: 28px 6% auto; height: 90px; }
+  .entry-no { font-size: 34px; top: 4px; right: 8px; }
+  .entry h3 { font-size: 17px; }
+  .entry p { font-size: 12.5px; line-height: 1.35; min-height: 0; margin-bottom: 10px; }
+  .bar { grid-template-columns: 0.9em 1fr; gap: 5px; font-size: 9px; }
+  .bar em { display: none; }
+  .entry .price { font-size: 11px; margin-top: 10px; padding-top: 8px; }
   .chapter-head .no { font-size: 48px; }
 }
