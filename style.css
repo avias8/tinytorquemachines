@@ -1,0 +1,242 @@
+/* Tiny Torque Machines: the game's own palette, system fonts only, so the
+   site makes no third-party requests. */
+:root {
+  --canvas: #0e1013;
+  --graphite: #1a1d22;
+  --raised: #24282f;
+  --hairline: rgba(255, 255, 255, 0.10);
+  --ivory: #f2efe6;
+  --secondary: #b9bcc4;
+  --muted: #858a94;
+  --red: #d8312b;
+  --red-bright: #ff4a3d;
+  --amber: #f2a81d;
+  --radius: 16px;
+  --width: 1080px;
+  --display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ivory);
+  font: 17px/1.6 var(--display);
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--ivory); text-decoration-color: var(--red); text-underline-offset: 3px; }
+a:hover { color: var(--red-bright); }
+
+.wrap { width: min(var(--width), 100% - 32px); margin-inline: auto; }
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(14, 16, 19, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.brand img { width: 32px; height: 32px; border-radius: 8px; }
+.site-nav { display: flex; gap: 18px; font-size: 15px; }
+.site-nav a { text-decoration: none; color: var(--secondary); }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--ivory); }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: min(78vh, 640px);
+  display: flex;
+  align-items: flex-end;
+  background: var(--graphite) url("assets/hero.jpg") center / cover no-repeat;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14,16,19,0.15) 0%, rgba(14,16,19,0.35) 45%, var(--canvas) 100%);
+}
+.hero .wrap { position: relative; z-index: 1; padding-block: 56px; }
+.hero h1 {
+  margin: 0;
+  font-size: clamp(40px, 8vw, 84px);
+  line-height: 0.95;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+.hero p.lede {
+  margin: 14px 0 26px;
+  max-width: 34em;
+  font-size: clamp(18px, 2.4vw, 22px);
+  color: var(--secondary);
+}
+
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--red);
+  color: var(--ivory);
+  font-weight: 800;
+  text-decoration: none;
+}
+.store-badge.soon { background: var(--raised); border: 1px solid var(--hairline); cursor: default; }
+.store-badge small { display: block; font-weight: 600; font-size: 12px; color: var(--secondary); }
+
+.kicker {
+  font: 800 12px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+/* Sections */
+section { padding-block: 56px; }
+section h2 {
+  margin: 8px 0 18px;
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.1;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.card {
+  padding: 22px;
+  border-radius: var(--radius);
+  background: var(--graphite);
+  border: 1px solid var(--hairline);
+}
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.card p, .card ul { margin: 0; color: var(--secondary); font-size: 16px; }
+.card ul { padding-left: 1.1em; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+.gallery figure { margin: 0; }
+.gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--hairline);
+  background: var(--graphite);
+}
+.gallery figcaption { margin-top: 8px; font-size: 14px; color: var(--muted); }
+
+/* Text pages */
+.page { padding-block: 48px 72px; }
+.page h1 {
+  margin: 8px 0 6px;
+  font-size: clamp(32px, 6vw, 52px);
+  line-height: 1.05;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+}
+.page .updated { color: var(--muted); font: 600 13px/1.4 var(--mono); letter-spacing: 0.06em; }
+.prose { max-width: 720px; }
+.prose h2 {
+  margin: 40px 0 10px;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.prose h3 { margin: 26px 0 6px; font-size: 18px; }
+.prose p, .prose li { color: var(--secondary); }
+.prose strong { color: var(--ivory); }
+.prose table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
+.prose th, .prose td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+.prose th { color: var(--ivory); font-weight: 700; }
+.prose td { color: var(--secondary); }
+.table-scroll { overflow-x: auto; }
+
+.contact {
+  margin: 22px 0 8px;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  background: var(--graphite);
+  border: 1px solid var(--hairline);
+}
+.contact a { font-weight: 800; font-size: 19px; overflow-wrap: anywhere; }
+
+details {
+  border-bottom: 1px solid var(--hairline);
+  padding: 14px 0;
+}
+details summary {
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--ivory);
+  list-style: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "+"; display: inline-block; width: 1.2em; color: var(--red); font-weight: 900; }
+details[open] summary::before { content: "–"; }
+details p, details ul { margin: 10px 0 0 1.2em; }
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--hairline);
+  padding-block: 28px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.site-footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+.site-footer nav { display: flex; gap: 18px; }
+.site-footer a { color: var(--secondary); text-decoration: none; }
+
+@media (max-width: 520px) {
+  body { font-size: 16px; }
+  .brand span { display: none; }
+  .site-nav { gap: 14px; }
+  section { padding-block: 40px; }
+}
